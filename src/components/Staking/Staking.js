@@ -3,13 +3,15 @@ import React, { Fragment } from "react";
 // import { Button } from "@cubitrix/cubitrix-react-ui-module";
 import './Staking.css';
 import '../../assets/css/main-theme.css';
-import InfoCircle from '../../assets/svgs/info-circle.svg';
-import CurrentStakeIcon from '../../assets/svgs/current-stake.svg';
-import EarnIcon from '../../assets/svgs/earn-icon.svg';
-import RewardIcon from '../../assets/svgs/reward-icon.svg';
-import WalletIcon from '../../assets/svgs/wallet-money-icon.svg';
-import TotalStackedIcon from '../../assets/svgs/total-stacked-icon.svg';
-import TotalUnStakedIcon from '../../assets/svgs/total-unstaked-icon.svg';
+import { 
+  InfoCircleIcon,
+  CurrentStakeIcon,
+  EarnIcon,
+  RewardIcon,
+  WalletMoneyIcon,
+  TotalStakedIcon,
+  TotalUnstakedIcon
+} from '../../assets/svgs/index';
 
 const stakeFakeData = [
   {
@@ -61,7 +63,7 @@ export const Staking = (props) => {
           <li>360 D</li>
         </ul>
         <div className="staking-left__help">
-          <img src={InfoCircle} />
+          <InfoCircleIcon />
           <p className="font-10">15 % APY On 30 Days. Locked Until 02/02/2023 2:33 PM</p>
         </div>
         <button className="staking-left__btn">Stake</button>
@@ -72,21 +74,21 @@ export const Staking = (props) => {
           <div className="staking-right__info-item">
               <div className="staking-right__info-element font-16">
                   <p>
-                    <img src={CurrentStakeIcon} />
+                    <CurrentStakeIcon />
                     Current Stake
                   </p>
                   <p>1,220.2 CML</p>
               </div>
               <div className="staking-right__info-element">
                   <p className="font-16">
-                    <img src={EarnIcon} />
+                    <EarnIcon />
                     Earn
                   </p>
                   <p >1,020 CML</p>
               </div>
               <div className="staking-right__info-element">
                   <p>
-                    <img src={RewardIcon} />
+                    <RewardIcon />
                     Claimed Reward
                   </p>
                   <p>1,132.1 CML</p>
@@ -95,21 +97,21 @@ export const Staking = (props) => {
           <div className="staking-right__info-item">
               <div className="staking-right__info-element font-16">
                   <p>
-                    <img src={WalletIcon} />
+                    <WalletMoneyIcon />
                     Your Wallet Balance
                   </p>
                   <p>1,220.2 CML</p>
               </div>
               <div className="staking-right__info-element">
                   <p className="font-16">
-                    <img src={TotalStackedIcon} />
-                    Total Stacked
+                    <TotalStakedIcon />
+                    Total Staked
                   </p>
                   <p >1,020 CML</p>
               </div>
               <div className="staking-right__info-element">
                   <p>
-                    <img src={TotalUnStakedIcon} />
+                    <TotalUnstakedIcon />
                     Total Unstaked
                   </p>
                   <p>1,132.1 CML</p>
@@ -121,7 +123,7 @@ export const Staking = (props) => {
                 <th>Staked Amount</th>
                 <th>Stake Date</th>
                 <th>Unstake Date</th>
-                <th>Earm Reward</th>
+                <th>Earn Reward</th>
                 <th>Harvest</th>
               </tr>
              {stakeFakeData.map(item => (
