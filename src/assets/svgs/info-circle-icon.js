@@ -8,4 +8,4 @@ const InfoCircleIcon = () => {
     )
 }
 
-export default InfoCircleIcon
+export default InfoCircleIcon;
