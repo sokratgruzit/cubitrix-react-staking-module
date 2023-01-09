@@ -1,0 +1,94 @@
+@font-face {
+    font-family: "UberMove-Medium";
+    src: url('../fonts/UberMove/UberMove-Medium.eot');
+    src: url("../fonts/UberMove/UberMove-Medium.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/UberMove/UberMove-Medium.svg#Lack-Regular") format("svg"),
+    url("../fonts/UberMove/UberMove-Medium.ttf") format("truetype"),
+    url("../fonts/UberMove/UberMove-Medium.woff") format("woff"),
+    url("../fonts/UberMove/UberMove-Medium.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "UberMove-Regular";
+    src: url('../fonts/UberMove/UberMove-Regular.eot');
+    src: url("../fonts/UberMove/UberMove-Regular.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/UberMove/UberMove-Regular.svg#Lack-Regular") format("svg"),
+    url("../fonts/UberMove/UberMove-Regular.ttf") format("truetype"),
+    url("../fonts/UberMove/UberMove-Regular.woff") format("woff"),
+    url("../fonts/UberMove/UberMove-Regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+    font-family: "UberMove-Medium";
+    font-size: 14px;
+    /* line-height: 24px; */
+    color: rgba(255,255,255,1);
+    text-decoration: none;
+    outline-color: none;
+    box-sizing: border-box;
+}
+html {
+    overflow-x: hidden;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+}
+body {
+    margin: 0;
+    -webkit-text-size-adjust:100%;
+    -moz-text-size-adjust:100%;
+    -ms-text-size-adjust:100%;
+    text-size-adjust: 100%;
+    background: #070B1A;
+}
+ul,li,p,img,h1,h2,h3,h4,h5,h6,input,button,nav {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-weight: normal;
+}
+input , textarea {
+    outline: none;
+    box-shadow: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: none;
+}
+.container{
+    width: 100%;
+    max-width: 1920px;
+    padding: 0px 80px;
+    margin: 0px auto;
+    display: flex;
+    position: relative;
+    z-index: 5;
+}
+.font-10{
+    font-size: 10px;
+    line-height: 140%;
+}
+.font-12{
+    font-size: 12px;
+    line-height: 140%;
+}
+.font-14{
+    font-size: 14px;
+    line-height: 140%;
+}
+.font-16{
+    font-size: 16px;
+    line-height: 140%;
+}
+.font-regular {
+    font-family: "UberMove-Regular";
+}
+.font-medium {
+    font-family: "UberMove-Medium";
+}
