@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -14,7 +14,8 @@ import {
   TotalUnstakedIcon
 } from '../../assets/svgs/index';
 
-import moment from 'moment';
+import * as moment_ from 'moment';
+const moment = moment_;
 
 // const stakeFakeData = [
 //   {
