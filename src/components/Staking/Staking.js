@@ -14,9 +14,7 @@ import {
   TotalUnstakedIcon
 } from '../../assets/svgs/index';
 
-import STACK_ABI from "./stack.json";
-import WBNB from ".BNB.json";
-import moment from "moment";
+import moment from 'moment';
 
 // const stakeFakeData = [
 //   {
@@ -71,9 +69,8 @@ const BUTTONS_DATA = [
   },
 ];
 
-export const Staking = ({ useConnect, name }) => {
+export const Staking = ({ useConnect, STACK_ABI, WBNB }) => {
   const { active: isActive, account, library } = useConnect();
-  console.log(name)
 
   var web3Obj = library;
 
