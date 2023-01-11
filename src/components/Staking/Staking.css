@@ -20,7 +20,7 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.staking-left__info{
+.staking-left__info { 
     width: 23.143rem;
     height: 8.571rem;
     background: #070B1A;
@@ -31,11 +31,11 @@
     padding: 1.429rem 1.143rem;
 }
 
-.staking-left-info h2{
+.staking-left__info h2{
     font-weight: 500;
 }
 
-.staking-left-info p{
+.staking-left__info p {
     font-weight: 400;
     display: flex;
     justify-content: space-between;
@@ -62,49 +62,45 @@
     border-radius: 0.571rem;
 }
 
-.staking-left__input span {
+.staking-left__input button {
     position: absolute;
     left: 20rem;
     bottom: 0.857rem;
+    background: none;
+    border: none;
     text-decoration-line: underline;    
     font-weight: 400;
     font-family: 'Uber Move';
     user-select: none;
 }
 
-.staking-left__list {
-    display: flex;
-    font-family: 'Uber Move';
-    font-style: normal;
-    font-weight: 500;
-    line-height: 140%;
+.staking-left__buttons-list {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     text-align: center;
-    color: #6A6D76;
     padding: 0.786rem 0 0.964rem 0;
 }
 
-.staking-left__list li {
+/* .staking-left__list li {
     width: 4.286rem;
     height: 3.143rem;
     padding-top: 0.857rem;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 0.571rem;
-}
+} */
 
-.staking-left__list li.active {
+/* .staking-left__list li.active {
     background: #3D5AFE;
     color: #FFFFFF;
-}
+} */
 
 .staking-left__help{
     width: 100%;
     height: 1.714rem;    
     display: flex;
     align-items: center;
-    justify-content: space-around;
 }
 .staking-left__help p {
     font-family: 'Uber Move';
@@ -112,12 +108,8 @@
     font-weight: 400;
 }
 
-.staking-left__btn {
-    padding: 1.107rem 2.143rem;
-    width: 23.143rem;
-    height: 3.643;
-    background: #3D5AFE;
-    border-radius: 2.286rem;
+.staking-left__help svg {
+    padding-right: 4px;
 }
 
 .staking-right {
@@ -183,16 +175,18 @@
 
 .staking-right__stakes {
     width: 1036px;
-    height: 320px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
+}
+
+.staking-right__stakes tr {
+    height: 78px;
 }
 
 .staking-right__stakes-head {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 78px;
     padding: 0 216px 0 16px;
     background: rgba(255, 255, 255, 0.03);
     border-radius: 7px 7px 0px 0px;
@@ -239,6 +233,11 @@
     margin: 0 20px 0 0;
 }
 
+.unstake-btn.disabled {
+    border: 1px solid #393C48;
+    color: #6A6D76;
+}
+
 .harvest-btn {
     background: #3D5AFE;
     border-radius: 32px;
@@ -246,4 +245,13 @@
     height: 43px;
     color: #FFFFFF;
     font-weight: 500;
+}
+
+.harvest-btn.disabled {
+    background: #393C48;
+    color: #6A6D76;
+}
+
+.staking-right__stakes-nocontent {
+    text-align: center;
 }

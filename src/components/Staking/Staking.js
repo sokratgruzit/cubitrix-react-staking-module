@@ -17,30 +17,9 @@ import {
 import * as moment_ from 'moment';
 const moment = moment_;
 
-// const stakeFakeData = [
-//   {
-//       id: 1,
-//       amount: '1,220,000.2',
-//       stakeDate: '01.02.2023 10:00AM',
-//       unstakeDate: '01.02.2023 08:15PM',
-//       reward: 'CML',
-//       harvest: '1,132,000.1',
-//   }, {
-//     id: 2,
-//     amount: '1,220,000.2',
-//     stakeDate: '01.02.2023 10:00AM',
-//     unstakeDate: '01.02.2023 08:15PM',
-//     reward: 'CML',
-//     harvest: '1,132,000.1',
-//   }, {
-//     id: 3,
-//     amount: '1,220,000,000.2',
-//     stakeDate: '01.02.2023 10:00AM',
-//     unstakeDate: '01.02.2023 08:15PM',
-//     reward: 'CML',
-//     harvest: '1,132,000.1',
-//   }, 
-// ]
+import { useConnect } from '@cubitrix/cubitrix-react-connect-module';
+import Button from "../Button/Button";
+
 
 const BUTTONS_DATA = [
   {
@@ -59,7 +38,7 @@ const BUTTONS_DATA = [
     period: 90,
   },
   {
-    title: "180 Day",
+    title: "180 D",
     time: 3,
     period: 180,
   },
@@ -70,9 +49,9 @@ const BUTTONS_DATA = [
   },
 ];
 
-export const Staking = ({ useConnect, STACK_ABI, WBNB }) => {
-  const { active: isActive, account, library } = useConnect();
-
+export const Staking = ({ STACK_ABI, WBNB }) => {
+  const { account, library } = useConnect();
+  console.log('new logggggnp')
   var web3Obj = library;
 
   var Router = "0x61d27DFd33718E47FBcFBf31B8e96439D3eccbdD"; // Staking contract Address
@@ -102,7 +81,7 @@ export const Staking = ({ useConnect, STACK_ABI, WBNB }) => {
   const [stakersRecord, setStakersRecord] = useState([]);
 
   const [isAllowance, setIsAllowance] = useState(false);
-  const [loading, setLoadding] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const notify = (isError, msg) => {
     if (isError) {
@@ -114,11 +93,12 @@ export const Staking = ({ useConnect, STACK_ABI, WBNB }) => {
         position: toast.POSITION.TOP_RIGHT,
       });
     }
+    // console.log('err')
   };
 
   const checkAllowance = async () => {
     try {
-      setLoadding(true);
+      setLoading(true);
 
       var tokenContract = new web3Obj.eth.Contract(WBNB, tokenAddress);
       var decimals = await tokenContract.methods.decimals().call();
@@ -138,14 +118,14 @@ export const Staking = ({ useConnect, STACK_ABI, WBNB }) => {
           setIsAllowance(true);
         }
       }
-      setLoadding(false);
+      setLoading(false);
     } catch (err) {
-      setLoadding(false);
+      setLoading(false);
     }
   };
 
   const approve = async () => {
-    setLoadding(true);
+    setLoading(true);
     try {
       var contract = new web3Obj.eth.Contract(WBNB, tokenAddress);
 
@@ -159,11 +139,11 @@ export const Staking = ({ useConnect, STACK_ABI, WBNB }) => {
         .then(() => {
           setIsAllowance(false);
           // checkAllowance("0xaae3d23a76920c9064aefdd571360289fcc80053");
-          setLoadding(false);
+          setLoading(false);
         });
     } catch (err) {
       console.log(err);
-      setLoadding(false);
+      setLoading(false);
       notify(true, err.message);
     }
   };
@@ -174,7 +154,7 @@ export const Staking = ({ useConnect, STACK_ABI, WBNB }) => {
       return;
     }
     await checkAllowance();
-    setLoadding(true);
+    setLoading(true);
     try {
       var tokenContract = new web3Obj.eth.Contract(WBNB, tokenAddress);
       const decimals = await tokenContract.methods.decimals().call();
@@ -191,17 +171,17 @@ export const Staking = ({ useConnect, STACK_ABI, WBNB }) => {
         .send({ from: account })
         .then((err) => {
           getStackerInfo();
-          setLoadding(false);
+          setLoading(false);
           notify(false, "Staking process complete.");
         });
     } catch (err) {
-      setLoadding(false);
+      setLoading(false);
       notify(true, err.message);
     }
   };
 
   const unstake = async (index) => {
-    setLoadding(true);
+    setLoading(true);
     try {
       var contract = new web3Obj.eth.Contract(STACK_ABI, Router);
       await contract.methods
@@ -209,18 +189,18 @@ export const Staking = ({ useConnect, STACK_ABI, WBNB }) => {
         .send({ from: account })
         .then((result) => {
           getStackerInfo();
-          setLoadding(false);
+          setLoading(false);
           notify(false, "successfully unstake");
           //   withdrawModal();
         });
     } catch (err) {
-      setLoadding(false);
+      setLoading(false);
       notify(true, "unstake fail");
     }
   };
 
   const harvest = async (index) => {
-    setLoadding(true);
+    setLoading(true);
     try {
       var contract = new web3Obj.eth.Contract(STACK_ABI, Router);
       await contract.methods
@@ -228,19 +208,19 @@ export const Staking = ({ useConnect, STACK_ABI, WBNB }) => {
         .send({ from: account })
         .then((err) => {
           getStackerInfo();
-          setLoadding(false);
+          setLoading(false);
           checkAllowance();
           notify(false, "Reward successfully harvested");
         });
     } catch (err) {
       console.log(err);
-      setLoadding(false);
+      setLoading(false);
       notify(true, err.message);
     }
   };
 
   const getStackerInfo = async () => {
-    setLoadding(true);
+    setLoading(true);
     try {
       var tokenContract = new web3Obj.eth.Contract(WBNB, tokenAddress);
       var decimals = await tokenContract.methods.decimals().call();
@@ -291,10 +271,10 @@ export const Staking = ({ useConnect, STACK_ABI, WBNB }) => {
         totalStakers: totalStakers,
         totalStakedToken: totalStakedToken,
       });
-      setLoadding(false);
+      setLoading(false);
     } catch (err) {
       // console.log(err);
-      setLoadding(false);
+      setLoading(false);
       setStakersInfo({
         totalStakedTokenUser: 0,
         totalUnstakedTokenUser: 0,
@@ -314,21 +294,26 @@ export const Staking = ({ useConnect, STACK_ABI, WBNB }) => {
   };
 
   const setMaxWithdrawal = async () => {
-    var tokenContract = new web3Obj.eth.Contract(WBNB, tokenAddress);
-    var decimals = await tokenContract.methods.decimals().call();
-    var getBalance = await tokenContract.methods.balanceOf(account.toString()).call();
-    var pow = 10 ** decimals;
-    var balanceInEth = getBalance / pow;
-    setDepositAmount(balanceInEth.toFixed(5));
+    if (web3Obj) {
+      var tokenContract = new web3Obj.eth.Contract(WBNB, tokenAddress);
+      var decimals = await tokenContract.methods.decimals().call();
+      var getBalance = await tokenContract.methods.balanceOf(account.toString()).call();
+      var pow = 10 ** decimals;
+      var balanceInEth = getBalance / pow;
+      setDepositAmount(balanceInEth.toFixed(5));
+    } else {
+      const defaultBalance = 0;
+      setDepositAmount(defaultBalance.toFixed(4))
+    }
     // setWithdrawAmount(userInfo.staked);
   };
 
   useEffect(() => {
-    if (isActive) {
+    if (account) {
       checkAllowance();
       getStackerInfo();
     }
-  }, [isActive, account]);
+  }, [account]);
 
   return (
     <>
@@ -352,16 +337,21 @@ export const Staking = ({ useConnect, STACK_ABI, WBNB }) => {
             />
             <button 
               className="font-12"
-              onClick={() => setMaxWithdrawal()}
+              onClick={(e) => {
+                e.preventDefault();
+                setMaxWithdrawal()
+              }}
             >
               MAX
             </button>
           </form>
-          <ul className="staking-left__list">
+          <div className="staking-left__buttons-list">
             {BUTTONS_DATA.map((btn) => {
               return (
-                <li
+                <Button
                   key={btn.period}
+                  label={btn.title}
+                  className='staking-left__buttons-list-item'
                   onClick={async () => {
                     setTimeperiod(btn.time);
                     setTimeperiodDate(
@@ -370,22 +360,58 @@ export const Staking = ({ useConnect, STACK_ABI, WBNB }) => {
                         .format("DD/MM/YYYY h:mm A"),
                     )
                   }}
-                >
-                  {btn.title}
-                </li>
+                  customStyles={{
+                    color:
+                      timeperiod === btn.time && '#FFFFFF',
+                    backgroundColor:
+                      timeperiod === btn.time && "#3D5AFE"
+                  }}
+                />
               )
             })}
-          </ul>
+          </div>
           <div className="staking-left__help">
             <InfoCircleIcon />
-            <p className="font-10">15 % APY On 30 Days. Locked Until 02/02/2023 2:33 PM</p>
+            <p className="font-10">
+              {timeperiod === 0
+                ? "15 % APY On 30 Days. Locked until " + timeperiodDate
+                : timeperiod === 1
+                ? "22.5% APY On 60 Days. Locked until " + timeperiodDate
+                : timeperiod === 2
+                ? "29% APY On 90 Days. Locked until " + timeperiodDate
+                : timeperiod === 3
+                ? "36.3% APY On 180 Days. Locked until " + timeperiodDate
+                : "50.0% APY On 360 Days. Locked until " + timeperiodDate
+              }
+            </p>
           </div>
-          <button 
-            className="staking-left__btn"
-            onClick={stake}
-          >
-            Stake
-          </button>
+          {account ? (
+            isAllowance ? (
+                <Button 
+                  label={loading ? "Please wait, Loading.." : "Enable"}
+                  className="staking-left__stake-btn"
+                  onClick={() =>
+                    approve("0xaae3d23a76920c9064aefdd571360289fcc80053")
+                  }
+                  disabled={loading}
+                />
+              ) : (
+                <Button 
+                  label={loading ? "Please wait, Loading.." : "Stake"}
+                  disabled={loading}
+                  className="staking-left__stake-btn"
+                  onClick={() =>
+                    stake("0xaae3d23a76920c9064aefdd571360289fcc80053")
+                  }                
+                />
+              )
+            ) : (
+              <Button 
+                label='Connect Wallet'
+                className="staking-left__stake-btn"
+                onClick={() => console.log('connect wallet') }                  
+              />
+            )}
         </div>
         <div className="staking-right">
           <h2 className="staking-right__header">Your Stake</h2>
@@ -415,7 +441,7 @@ export const Staking = ({ useConnect, STACK_ABI, WBNB }) => {
                       Claimed Reward
                     </p>
                     <p>
-                      {parseFloat(stakersInfo.totalClaimedRewardTokenUser).toFixed(5)} MCX
+                      {parseFloat(stakersInfo.totalClaimedRewardTokenUser).toFixed(5)} CMCX
                     </p>
                 </div>
             </div>
@@ -425,7 +451,7 @@ export const Staking = ({ useConnect, STACK_ABI, WBNB }) => {
                       <WalletMoneyIcon />
                       Your Wallet Balance
                     </p>
-                    <p>{balance.toFixed(5)} CML</p>
+                    <p>{balance.toFixed(5)} CMCX</p>
                 </div>
                 <div className="staking-right__info-element">
                     <p className="font-16">
@@ -448,6 +474,7 @@ export const Staking = ({ useConnect, STACK_ABI, WBNB }) => {
             </div>
           </div>
           <table className="staking-right__stakes">
+              <thead>
                 <tr className="staking-right__stakes-head font-14">
                   <th>Staked Amount</th>
                   <th>Stake Date</th>
@@ -455,8 +482,10 @@ export const Staking = ({ useConnect, STACK_ABI, WBNB }) => {
                   <th>Earn Reward</th>
                   <th>Harvest</th>
                 </tr>
+              </thead>
+                <tbody>
                   {stakersRecord.length > 0 ? (
-                    stakersRecord.map((row, index) => {
+                    stakeFakeData.map((row, index) => {
                       return (
                         <tr key={index} className="staking-right__stakes-content">
                           <td>
@@ -503,12 +532,13 @@ export const Staking = ({ useConnect, STACK_ABI, WBNB }) => {
                       )
                     })
                   ) : (
-                    <tr>
+                    <tr className="staking-right__stakes-nocontent">
                       <td colSpan={7} className="text-center">
                         You have no stake record yet.
                       </td>
                     </tr>
                   )}
+                </tbody>
             </table>
         </div>
       </div>

@@ -1,0 +1,19 @@
+.staking-left__buttons-list-item {
+    width: 4.286rem;
+    height: 3.143rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.571rem;
+    color: #6A6D76;
+    font-weight: 500;
+    line-height: 140%;
+}
+
+.staking-left__stake-btn {
+    padding: 1.107rem 0;
+    text-align: center;
+    width: 23.143rem;
+    height: 3.643;
+    background: #3D5AFE;
+    border-radius: 2.286rem;
+}
